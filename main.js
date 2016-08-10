@@ -4,7 +4,8 @@
 // const data = {
 // 	"rows": 8,
 // 	"letters": letters.split(''),
-// 	"circled": [3, 60]
+// 	"circled": [3, 60],
+// 	"solutions": [[]]
 // };
 
 // Strong
@@ -129,8 +130,8 @@ function checkSolution() {
 
 	for ( i = 0; i < data.solutions.length; i++) {
 		let solutionString = data.solutions[i].join('')
-		console.log(solutionString)
-		if (guessString == solutionString) {
+		let backwardsGuessString = guessString.split("").reverse().join("")
+		if (guessString == solutionString || backwardsGuessString == solutionString) {
 			window.setTimeout(win, 100)
 			return
 		}
