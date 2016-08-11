@@ -1,24 +1,31 @@
 // Puzzle Data
-// Tough
-// const letters = "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN"
-// const data = {
-// 	"rows": 8,
-// 	"letters": letters.split(''),
-// 	"circled": [3, 60],
-// 	"solutions": [[]]
-// };
+// "circled" is 0 indexed
+const levels = {
+	"warm_up":  {
+		"letters": "YTRXBEESUIVUSHYN",
+		"circled": [1, 14],
+		"solutions": [["TREE", "IVY"]]
+	},
+	"strong": {
+		"letters": "LEPEAWOAESNACSAHULARSRTSMOHIMPTOTSQZ",
+		"circled": [2, 33],
+		"solutions": [['PEAS', 'ROOTS'], ['PEA', 'SHOOTS']]
+	},
+	"tough": {
+		"letters": "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN",
+		"circled": [3, 60],
+		"solutions": [[]]
+	}
+}
 
 // Strong
-const letters = "LEPEAWOAESNACSAHULARSRTSMOHIMPTOTSQZ"
-const data = {
-	"rows": 6,
-	"letters": letters.split(''),
-	"circled": [2, 33],
-	"solutions": [['PEAS', 'ROOTS'], ['PEA', 'SHOOTS']]
-};
+let level = window.level;
+console.log(level)
+const data = levels[level];
 
 const isMobile = mobileCheck()
 const selectedCells = []
+const letters = data.letters.split('')
 let selectedCell
 
 function initialize() {
@@ -29,11 +36,12 @@ function initialize() {
 
 function renderBoard() {
 	const board = document.querySelector('.board')
-	board.style.width = data.rows * 70 + "px";
+	const numRows = Math.sqrt(data.letters.length)
+	board.style.width = numRows * 70 + "px";
 
-	for ( i = 0; i < data.rows; i++ ) {
+	for ( i = 0; i < numRows; i++ ) {
 		let colNum = 1
-		for ( j = data.rows * i; j < (data.rows * i) + data.rows; j++ ) {
+		for ( j = numRows * i; j < (numRows * i) + numRows; j++ ) {
 				let cell = document.createElement('div')
 				cell.className = "cell"
 				if (data.circled.includes(j)) cell.className += " circled"
@@ -41,7 +49,7 @@ function renderBoard() {
 				cell.setAttribute("row", i + 1)
 				cell.setAttribute("column", colNum)
 
-				if (colNum == data.rows) {
+				if (colNum == numRows) {
 					colNum = 1
 				} else {
 					colNum = colNum + 1
