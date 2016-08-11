@@ -173,13 +173,40 @@ function checkSolution() {
 		}
 	}
 
-	window.setTimeout(function() {
-		clearAllSelected()
-	}, 500)
+	lose()
 }
 
 function win() {
 	alert('yay!')
+}
+
+function flashText() {
+	let highlightedCells = document.querySelectorAll('.active')
+	highlightedCells.forEach(function(cell) {
+		cell.style.borderColor = cell.style.borderColor == "" ? "#f05859" : ""
+	})
+}
+
+function resetCellColors() {
+	let highlightedCells = document.querySelectorAll('.active')
+	highlightedCells.forEach(function(cell) {
+		cell.style.borderColor = ""
+	})
+}
+
+function lose() {
+	let x = 0
+	window.setTimeout(function() {
+		window.setInterval(function() {
+			if (x <= 2) flashText()
+			x++
+		}, 100)
+	}, 200)
+
+	window.setTimeout(function() {
+		resetCellColors()
+		clearAllSelected()
+	}, 750)
 }
 
 function mobileCheck() {
