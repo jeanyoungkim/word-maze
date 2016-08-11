@@ -13,10 +13,6 @@ body {
   left: 0;
 }
 
-h1 {
-	line-height: 2em;
-}
-
 div {
   box-sizing: border-box;
   display: flex;
@@ -28,6 +24,13 @@ div {
 .tough .board {
 	width: 90%;
 	max-width: 800px;
+}
+
+@media only screen and (max-device-width: 500px) {
+	.tough .board {
+		width: 90%;
+		max-width: 500px;
+	}
 }
 
 .cell {
