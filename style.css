@@ -42,6 +42,11 @@ div {
 	height: 60px;
 	width: 60px;
   position: relative;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
