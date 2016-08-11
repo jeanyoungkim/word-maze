@@ -41,9 +41,8 @@ div {
   font-size: 2em;
 	height: 60px;
 	width: 60px;
-  /*height: 30%;*/
   position: relative;
-  /*width: 30%;*/
+	user-select: none;
 }
 
 .cell.active,
