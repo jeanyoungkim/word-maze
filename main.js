@@ -55,15 +55,26 @@ function renderBoard() {
 function setUpEventHandlers() {
 	let cells = document.querySelectorAll('.cell')
 	let eventType = isMobile ? 'touchstart' : 'click'
-	cells.forEach(function(cell){
-		cell.addEventListener(eventType, function(e) {
+
+		document.addEventListener(eventType, function(e) {
 			if (e.target.className.includes('cell')) {
 				registerClick(e.target)
 			} else {
 				clearAllSelected()
 			}
 		})
-	})
+
+
+	// bind events to individual cells to avoid swipe issues
+	// cells.forEach(function(cell){
+	// 	cell.addEventListener(eventType, function(e) {
+	// 		if (e.target.className.includes('cell')) {
+	// 			registerClick(e.target)
+	// 		} else {
+	// 			clearAllSelected()
+	// 		}
+	// 	})
+	// })
 }
 
 function registerClick(selected) {
@@ -81,8 +92,6 @@ function registerClick(selected) {
 
 	selectedCell = selected // define newly
 	validateOrClearSelection()
-	// [row, col, val]
-	//[selected.attributes.row.value, selected.attributes.column.value, selected.innerHTML]
 }
 
 function validateOrClearSelection() {
