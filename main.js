@@ -18,7 +18,6 @@ const levels = {
 	}
 }
 
-// Strong
 let level = window.level;
 const data = levels[level];
 
