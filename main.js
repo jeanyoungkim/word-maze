@@ -49,7 +49,7 @@ function renderBoard() {
 				let cell = document.createElement('div')
 				cell.className = "cell"
 				if (data.circled.includes(j)) cell.className += " circled"
-				if (data.black.includes(j)) cell.className += " black"
+				if (data.black && data.black.includes(j)) cell.className += " black"
 				cell.innerHTML = data.letters[j]
 				cell.setAttribute("row", i + 1)
 				cell.setAttribute("column", colNum)
