@@ -24,6 +24,7 @@ console.log(level)
 const data = levels[level];
 
 const isMobile = mobileCheck()
+const eventType = isMobile ? 'touchstart' : 'mouseover'
 const selectedCells = []
 const letters = data.letters.split('')
 let selectedCell
@@ -62,7 +63,6 @@ function renderBoard() {
 
 function setUpEventHandlers() {
 	let cells = document.querySelectorAll('.cell')
-	let eventType = isMobile ? 'touchstart' : 'mouseover'
 		document.addEventListener('click', function(e) {
 		if (!e.target.className.includes('cell')) {
 			clearAllSelected()
