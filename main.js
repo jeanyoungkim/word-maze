@@ -107,8 +107,8 @@ function registerClick(selected) {
 }
 
 function validateOrClearSelection() {
-	if (isValidMove(selectedCell)) {
-		addLineToSelected(selectedCell)
+	if (isValidMove()) {
+		addLineToSelected()
 		if (selectedCell.className.includes('circled')) {
 			checkSolution()
 		}
