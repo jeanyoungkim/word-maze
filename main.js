@@ -158,13 +158,17 @@ function clearAllSelected() {
 	selectedCells.length = 0
 }
 
-function checkSolution() {
+function temporarilyDisableEvents() {
 	let eventBlocker = document.querySelector('.event-blocker')
 	eventBlocker.style.zIndex = 100;
 
 	setTimeout(function() {
 		eventBlocker.style.zIndex = -100;
 	}, 1000)
+}
+
+function checkSolution() {
+	temporarilyDisableEvents()
 
 	let guessString = ""
 	selectedCells.forEach(function(element) {
