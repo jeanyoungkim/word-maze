@@ -189,18 +189,9 @@ function win() {
 	alert('yay!')
 }
 
-function flashText() {
-	let highlightedCells = document.querySelectorAll('.active')
-	highlightedCells.forEach(function(cell) {
-		cell.style.borderColor = cell.style.borderColor == "" ? "#f05859" : ""
 	})
 }
 
-function resetCellColors() {
-	let highlightedCells = document.querySelectorAll('.active')
-	highlightedCells.forEach(function(cell) {
-		cell.style.borderColor = ""
-	})
 }
 
 function lose() {
@@ -217,6 +208,21 @@ function lose() {
 		clearAllSelected()
 	}, 750)
 }
+
+function flashText() {
+	let highlightedCells = document.querySelectorAll('.active')
+	highlightedCells.forEach(function(cell) {
+		cell.style.borderColor = cell.style.borderColor == "" ? "#F27376" : ""
+	})
+}
+
+function resetCellColors() {
+	let highlightedCells = document.querySelectorAll('.active')
+	highlightedCells.forEach(function(cell) {
+		cell.style.borderColor = ""
+	})
+}
+
 
 function mobileCheck() {
   var check = false;
