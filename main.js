@@ -90,8 +90,8 @@ function setUpEventHandlers() {
 function registerClick(selected) {
 	// Make sure first cell selected is a circled letter
 	if (selectedCells.length < 1 ) {
-		if (selected.className.includes('circled')) {
-			selected.className += ' active'
+		if (selected.className.includes('circled') && !selectedCells.includes(selectedCell)) {
+			activateCell(selected)
 			selectedCells.push(selected)
 		}
 		return
