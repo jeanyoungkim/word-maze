@@ -136,9 +136,9 @@ function isValidMove() {
 
 function areAligned() {
 	let lastSelected = selectedCells[selectedCells.length - 1]
-	if (lastSelected.attributes.row.value === selectedCell.attributes.row.value) {
+	if (lastSelected.attributes.row.value === selectedCell.attributes.row.value && Math.abs(lastSelected.attributes.column.value - selectedCell.attributes.column.value) == 1) {
 		return 'row'
-	} else if (lastSelected.attributes.column.value === selectedCell.attributes.column.value){
+	} else if (lastSelected.attributes.column.value === selectedCell.attributes.column.value && Math.abs(lastSelected.attributes.row.value - selectedCell.attributes.row.value) == 1){
 		return 'column'
 	}
 
