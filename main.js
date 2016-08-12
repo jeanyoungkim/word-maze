@@ -15,6 +15,12 @@ const levels = {
 		"letters": "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN",
 		"circled": [3, 60],
 		"solutions": [['SAGE', 'BONSAI', 'VENUS', 'FLYTRAP', 'BEETS']]
+	},
+	"fish": {
+		"letters": "NIFILONHSMNODGGUATAILSLQIPIGTACSLLOILEZTHHCNMOUYN",
+		"circled": [2, 40],
+		"black": [15, 25, 38],
+		"solutions": [['FIN', 'TAIL', 'GILL', 'SCALE', 'MOUTH']]
 	}
 }
 
@@ -43,6 +49,7 @@ function renderBoard() {
 				let cell = document.createElement('div')
 				cell.className = "cell"
 				if (data.circled.includes(j)) cell.className += " circled"
+				if (data.black.includes(j)) cell.className += " black"
 				cell.innerHTML = data.letters[j]
 				cell.setAttribute("row", i + 1)
 				cell.setAttribute("column", colNum)
@@ -68,9 +75,10 @@ function setUpEventHandlers() {
 
 	// bind events to individual cells to avoid swipe issues
 	cells.forEach(function(cell){
+		let isSelectable = !cell.classList.contains('black')
 		cell.addEventListener(eventType, function(e) {
 			e.stopPropagation();
-			if (e.target.className.includes('cell')) {
+			if (isSelectable && e.target.className.includes('cell')) {
 				registerClick(e.target)
 			} else {
 				clearAllSelected()
