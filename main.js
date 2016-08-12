@@ -84,20 +84,19 @@ function setUpEventHandlers() {
 	// bind events to individual cells to avoid swipe issues
 	cells.forEach(function(cell){
 		let isSelectable = !cell.classList.contains('black')
-		eventTypes.forEach(function(eventType) {
-			cell.addEventListener((eventType), function(e) {
-				let element = document.elementFromPoint(e.pageX, e.pageY);
-				console.log(element, eventType)
-			})
-		})
-		// cell.addEventListener(eventType, function(e) {
-		// 	e.stopPropagation();
-		// 	if (isSelectable && e.target.className.includes('cell')) {
-		// 		registerClick(e.target)
-		// 	} else {
-		// 		clearAllSelected()
-		// 	}
+		// eventTypes.forEach(function(ev) {
+		// 	cell.addEventListener((ev), function() {
+		// 		console.log('event:', ev)
+		// 	})
 		// })
+		cell.addEventListener(eventType, function(e) {
+			e.stopPropagation();
+			if (isSelectable && e.target.className.includes('cell')) {
+				registerClick(e.target)
+			} else {
+				clearAllSelected()
+			}
+		})
 	})
 }
 
