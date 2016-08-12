@@ -66,15 +66,6 @@ function setUpEventHandlers() {
 		}
 	})
 
-		// document.addEventListener(eventType, function(e) {
-		// 	if (e.target.className.includes('cell')) {
-		// 		registerClick(e.target)
-		// 	} else {
-		// 		clearAllSelected()
-		// 	}
-		// })
-
-
 	// bind events to individual cells to avoid swipe issues
 	cells.forEach(function(cell){
 		cell.addEventListener(eventType, function(e) {
