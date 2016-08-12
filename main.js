@@ -177,7 +177,7 @@ function checkSolution() {
 		let solutionString = data.solutions[i].join('')
 		let backwardsGuessString = guessString.split("").reverse().join("")
 		if (guessString == solutionString || backwardsGuessString == solutionString) {
-			window.setTimeout(win, 100)
+			window.setTimeout(win(i), 100)
 			return
 		}
 	}
@@ -185,13 +185,32 @@ function checkSolution() {
 	lose()
 }
 
-function win() {
-	alert('yay!')
-}
-
+function win(index) {
+	let answerContainer = document.querySelector('.answers')
+	let answerArray = data.solutions[index]
+	// clone selected cell nodes
+	let selectedCellsCopy = []
+	selectedCells.forEach(function(cell) {
+		let cellClone = cell.cloneNode(true)
+		selectedCellsCopy.push(cellClone)
 	})
+
+	answerArray.forEach(function(text) {
+		for (var i = 0; i < text.length; i++) {
+			answerContainer.appendChild(selectedCellsCopy[i])
+		}
+	})
+
+	showCongratsModal()
 }
 
+function showCongratsModal() {
+	let congrats = document.querySelector('.congratulations')
+	// congrats.addEventListener('click', function(e) {
+	// 	e.stopPropagation()
+	// 	congrats.style.display = "none"
+	// })
+	congrats.style.display = "flex"
 }
 
 function lose() {
