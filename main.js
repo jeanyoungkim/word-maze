@@ -87,6 +87,14 @@ function setUpEventHandlers() {
 	})
 }
 
+function activateCell(cell) {
+	cell.classList.add('active')
+}
+
+function deactivateCell(cell) {
+	cell.classList.remove('active')
+}
+
 function registerClick(selected) {
 	// Make sure first cell selected is a circled letter
 	if (selectedCells.length < 1 ) {
