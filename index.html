@@ -8,24 +8,25 @@
   </head>
   <body>
     <h1>Word Maze</h1>
-		<div class="puzzle-info">
-			<p>Theme: PLANTS</p>
+		<div class="vertical-container">
+			<ol>
+				<lh>Rules</lh>
+				<li>Connect the two blue tiles using words</li>
+				<li>You may only traverse horizontally or vertically</li>
+				<li>Each letter may only be visited once</li>
+				<li>Your path must sequentially spell words out</li>
+			</ol>
+			<p>Select a theme and level of difficulty to begin!</p>
 		</div>
-		<div class="congratulations">
-			<div class="congratulations-overlay"></div>
-			<div class="congratulations-modal">
-				<h1>A-maze-ing!</h1>
-				<p>
-					Answers:
-				</p>
-				<div class="answers"></div>
-			</div>
+		<div class="vertical-container">
+			<h2>Theme: Plants</h2>
+			<a href="/plants/warmup"><div class="button">Warm Up</div></a>
+			<a href="/plants/strong"><div class="button">Strong</div></a>
+			<a href="/plants/tough"><div class="button">Tough</div></a>
 		</div>
-		<div class="event-blocker"></div>
-    <div class="board"></div>
+		<div class="vertical-container">
+			<h2>Theme: Parts of a Fish</h2>
+			<a href="/fish/strong"><div class="button">Strong</div></a>
+		</div>
   </body>
-	<script type="text/javascript">
-		window.level = "warm_up"
-	</script>
-  <script type="text/javascript" src="main.js"></script>
 </html>
