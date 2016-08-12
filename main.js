@@ -1,31 +1,37 @@
 // Puzzle Data
 // "circled" is 0 indexed
-const levels = {
-	"warm_up":  {
-		"letters": "YTRXBEESUIVUSHYN",
-		"circled": [1, 14],
-		"solutions": [["TREE", "IVY"]]
-	},
-	"strong": {
-		"letters": "LEPEAWOAESNACSAHULARSRTSMOHIMPTOTSQZ",
-		"circled": [2, 33],
-		"solutions": [['PEAS', 'ROOTS'], ['PEA', 'SHOOTS']]
-	},
-	"tough": {
-		"letters": "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN",
-		"circled": [3, 60],
-		"solutions": [['SAGE', 'BONSAI', 'VENUS', 'FLYTRAP', 'BEETS']]
+const puzzles = {
+	"plants": {
+		"warm_up":  {
+			"letters": "YTRXBEESUIVUSHYN",
+			"circled": [1, 14],
+			"solutions": [["TREE", "IVY"]]
+		},
+		"strong": {
+			"letters": "LEPEAWOAESNACSAHULARSRTSMOHIMPTOTSQZ",
+			"circled": [2, 33],
+			"solutions": [['PEAS', 'ROOTS'], ['PEA', 'SHOOTS']]
+		},
+		"tough": {
+			"letters": "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN",
+			"circled": [3, 60],
+			"solutions": [['SAGE', 'BONSAI', 'VENUS', 'FLYTRAP', 'BEETS']]
+		}
 	},
 	"fish": {
-		"letters": "NIFILONHSMNODGGUATAILSLQIPIGTACSLLOILEZTHHCNMOUYN",
-		"circled": [2, 40],
-		"black": [15, 25, 38],
-		"solutions": [['FIN', 'TAIL', 'GILL', 'SCALE', 'MOUTH']]
+		"strong": {
+			"letters": "NIFILONHSMNODGGUATAILSLQIPIGTACSLLOILEZTHHCNMOUYN",
+			"circled": [2, 40],
+			"black": [15, 25, 38],
+			"solutions": [['FIN', 'TAIL', 'GILL', 'SCALE', 'MOUTH']]
+		}
 	}
 }
 
-let level = window.level;
-const data = levels[level];
+let theme = window.theme
+let difficulty = window.difficulty
+
+const data = puzzles[theme][difficulty]
 
 const isMobile = mobileCheck()
 const eventType = isMobile ? 'touchstart' : 'mouseover'
