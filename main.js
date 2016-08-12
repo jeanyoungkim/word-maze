@@ -89,9 +89,6 @@ function registerClick(selected) {
 		return
 	}
 
-	// Don't double select
-	if (selectedCells.includes(selected)) return
-
 	selectedCell = selected // define newly
 	validateOrClearSelection()
 }
@@ -101,14 +98,17 @@ function isAlreadySelected() {
 }
 
 function validateOrClearSelection() {
+	// deselect
 	if (isAlreadySelected()) {
 		selectedCells[selectedCells.length - 1].classList.remove('active')
 		selectedCells.pop()
+	// select
 	} else if (isValidMove()) {
 		addLineToSelected()
 		if (selectedCell.className.includes('circled')) {
 			checkSolution()
 		}
+	// clear all
 	} else {
 		clearAllSelected()
 	}
@@ -116,7 +116,6 @@ function validateOrClearSelection() {
 
 function isValidMove() {
 	return areAligned()
-	// return areInSameRow() || areInSameColumn()
 }
 
 function areAligned() {
