@@ -176,8 +176,9 @@ function checkSolution() {
 	for ( i = 0; i < data.solutions.length; i++) {
 		let solutionString = data.solutions[i].join('')
 		let backwardsGuessString = guessString.split("").reverse().join("")
-		if (guessString == solutionString || backwardsGuessString == solutionString) {
-			window.setTimeout(win(i), 100)
+		let isBackwards = backwardsGuessString == solutionString
+		if (guessString == solutionString || isBackwards) {
+			window.setTimeout(win(i, isBackwards), 100)
 			return
 		}
 	}
@@ -185,8 +186,8 @@ function checkSolution() {
 	lose()
 }
 
-function win(index) {
-	let answerContainer = document.querySelector('.answers')
+function win(index, isBackwards) {
+	let answersContainer = document.querySelector('.answers')
 	let answerArray = data.solutions[index]
 	// clone selected cell nodes
 	let selectedCellsCopy = []
@@ -195,10 +196,19 @@ function win(index) {
 		selectedCellsCopy.push(cellClone)
 	})
 
-	answerArray.forEach(function(text) {
-		for (var i = 0; i < text.length; i++) {
-			answerContainer.appendChild(selectedCellsCopy[i])
-		}
+	if (isBackwards) selectedCellsCopy.reverse()
+
+	answerArray.forEach(function(text, index) {
+		let singleAnswer = document.createElement('div')
+		let offset = index == 0 ? 0 : answerArray[index - 1].length
+		let tiles = selectedCellsCopy.slice(offset, offset + text.length)
+
+		singleAnswer.className = 'answer'
+
+		tiles.forEach(function(tile) {
+			singleAnswer.appendChild(tile)
+		})
+		answersContainer.appendChild(singleAnswer)
 	})
 
 	showCongratsModal()
@@ -206,10 +216,6 @@ function win(index) {
 
 function showCongratsModal() {
 	let congrats = document.querySelector('.congratulations')
-	// congrats.addEventListener('click', function(e) {
-	// 	e.stopPropagation()
-	// 	congrats.style.display = "none"
-	// })
 	congrats.style.display = "flex"
 }
 
