@@ -14,7 +14,7 @@ const levels = {
 	"tough": {
 		"letters": "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN",
 		"circled": [3, 60],
-		"solutions": [[]]
+		"solutions": [['SAGE', 'BONSAI', 'VENUS', 'FLY', 'TRAP', 'BEETS']]
 	}
 }
 
