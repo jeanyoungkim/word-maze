@@ -20,7 +20,6 @@ const levels = {
 
 // Strong
 let level = window.level;
-console.log(level)
 const data = levels[level];
 
 const isMobile = mobileCheck()
@@ -32,7 +31,6 @@ let selectedCell
 function initialize() {
 	renderBoard()
 	setUpEventHandlers()
-	console.log(isMobile)
 }
 
 function renderBoard() {
