@@ -30,6 +30,8 @@ a {
 .vertical-container {
 	flex-direction: column;
 	flex-wrap: nowrap;
+	flex: 1 0 auto;
+	margin: 10px 0;
 }
 
 
