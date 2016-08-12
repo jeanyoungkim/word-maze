@@ -159,6 +159,13 @@ function clearAllSelected() {
 }
 
 function checkSolution() {
+	let eventBlocker = document.querySelector('.event-blocker')
+	eventBlocker.style.zIndex = 100;
+
+	setTimeout(function() {
+		eventBlocker.style.zIndex = -100;
+	}, 1000)
+
 	let guessString = ""
 	selectedCells.forEach(function(element) {
 		guessString += element.innerHTML
