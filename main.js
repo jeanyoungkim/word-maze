@@ -194,10 +194,12 @@ function win(index, isBackwards) {
 
 	if (isBackwards) selectedCellsCopy.reverse()
 
+	let offset = 0
 	answerArray.forEach(function(text, index) {
 		let singleAnswer = document.createElement('div')
-		let offset = index == 0 ? 0 : answerArray[index - 1].length
+		// let offset = index == 0 ? 0 : answerArray[index - 1].length
 		let tiles = selectedCellsCopy.slice(offset, offset + text.length)
+		offset += text.length
 
 		singleAnswer.className = 'answer'
 
