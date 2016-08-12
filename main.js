@@ -79,7 +79,7 @@ function setUpEventHandlers() {
 	// bind events to individual cells to avoid swipe issues
 	cells.forEach(function(cell){
 		cell.addEventListener(eventType, function(e) {
-			event.stopPropagation();
+			e.stopPropagation();
 			if (e.target.className.includes('cell')) {
 				registerClick(e.target)
 			} else {
