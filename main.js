@@ -178,7 +178,7 @@ function checkSolution() {
 		let backwardsGuessString = guessString.split("").reverse().join("")
 		let isBackwards = backwardsGuessString == solutionString
 		if (guessString == solutionString || isBackwards) {
-			window.setTimeout(win(i, isBackwards), 100)
+			win(i, isBackwards)
 			return
 		}
 	}
@@ -211,7 +211,9 @@ function win(index, isBackwards) {
 		answersContainer.appendChild(singleAnswer)
 	})
 
-	showCongratsModal()
+	setTimeout(function(){
+		showCongratsModal()
+	}, 400)
 }
 
 function showCongratsModal() {
