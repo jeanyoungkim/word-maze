@@ -81,7 +81,7 @@ function renderBoard() {
 
 function setUpEventHandlers() {
 	let cells = document.querySelectorAll('.cell')
-		document.addEventListener('click', function(e) {
+	document.addEventListener('click', function(e) {
 		if (e.target.tagName == 'BODY') {
 			clearAllSelected()
 		}
