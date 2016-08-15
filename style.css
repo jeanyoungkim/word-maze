@@ -78,8 +78,10 @@ a {
 
 .cell.active,
 .cell:hover {
+  background-color: #a5dbd9;
+  color: #fff;
 	cursor: pointer;
-	border: 4px solid #a5dbd9;
+	/*border: 4px solid #a5dbd9;*/
 }
 
 .black {
@@ -94,6 +96,7 @@ a {
 
 .circled {
 	background-color: #a5dbd9;
+  border: 4px dotted #fff;
 	color: #fff;
 }
 
@@ -136,7 +139,7 @@ a {
 }
 
 .congratulations-modal .circled.active {
-	border-color: #a5dbd9;
+	border: 4px dotted #fff;
 }
 
 .answers {
