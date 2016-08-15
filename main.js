@@ -25,7 +25,15 @@ const puzzles = {
 			"black": [15, 25, 38],
 			"solutions": [['FIN', 'TAIL', 'GILL', 'SCALE', 'MOUTH']]
 		}
-	}
+	},
+	"color": {
+             "strong": {
+                     "letters":"REDOCGEYEPRURANOLLLEPELNEOWOBLULBERGKCANTURQUBROWNEGROIPETTAAMINLANATSESKLAVENDER"
+                     "circled":[0, 80],
+                     "solutions": [['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BLACK', 'BROWN', 'TURQUOISE', 'MAGENTA', 'TAN', 'TEAL', 'PINK', 'LAVENDER'],
+                                    ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BLACK', 'BROWN', 'TAN', 'TEAL', 'PINK', 'LAVENDAR']]
+            }
+       }
 }
 
 let theme = window.theme
@@ -79,16 +87,9 @@ function setUpEventHandlers() {
 		}
 	})
 
-	let eventTypes = ['touchstart', 'touchmove', 'touchend']
-
 	// bind events to individual cells to avoid swipe issues
 	cells.forEach(function(cell){
 		let isSelectable = !cell.classList.contains('black')
-		// eventTypes.forEach(function(ev) {
-		// 	cell.addEventListener((ev), function() {
-		// 		console.log('event:', ev)
-		// 	})
-		// })
 		cell.addEventListener(eventType, function(e) {
 			e.stopPropagation();
 			if (isSelectable && e.target.className.includes('cell')) {
