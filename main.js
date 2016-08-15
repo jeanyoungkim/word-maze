@@ -133,7 +133,7 @@ function validateOrClearSelection() {
 		selectedCells[selectedCells.length - 1].classList.remove('active')
 		selectedCells.pop()
 	// select
-	} else if (isValidMove()) {
+	} else if (areAligned()) {
 		addLineToSelected()
 		if (selectedCell.className.includes('circled')) {
 			checkSolution()
@@ -142,10 +142,6 @@ function validateOrClearSelection() {
 	} else {
 		clearAllSelected()
 	}
-}
-
-function isValidMove() {
-	return areAligned()
 }
 
 function areAligned() {
