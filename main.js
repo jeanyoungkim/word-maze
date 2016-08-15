@@ -28,7 +28,7 @@ const puzzles = {
 	},
 	"color": {
              "strong": {
-                     "letters":"REDOCGEYEPRURANOLLLEPELNEOWOBLULBERGKCANTURQUBROWNEGROIPETTAAMINLANATSESKLAVENDER"
+                     "letters":"REDOCGEYEPRURANOLLLEPELNEOWOBLULBERGKCANTURQUBROWNEGROIPETTAAMINLANATSESKLAVENDER",
                      "circled":[0, 80],
                      "solutions": [['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BLACK', 'BROWN', 'TURQUOISE', 'MAGENTA', 'TAN', 'TEAL', 'PINK', 'LAVENDER'],
                                     ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BLACK', 'BROWN', 'TAN', 'TEAL', 'PINK', 'LAVENDAR']]
