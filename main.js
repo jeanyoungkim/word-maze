@@ -87,18 +87,55 @@ function setUpEventHandlers() {
 		}
 	})
 
-	// bind events to individual cells to avoid swipe issues
-	cells.forEach(function(cell){
-		let isSelectable = !cell.classList.contains('black')
-		cell.addEventListener(eventType, function(e) {
-			e.stopPropagation();
-			if (isSelectable && e.target.className.includes('cell')) {
-				registerClick(e.target)
-			} else {
-				clearAllSelected()
-			}
+	if (isMobile) {
+		setUpMobileEventHandlers()
+	} else {
+		// bind events to individual cells to avoid swipe issues
+		cells.forEach(function(cell){
+			console.log('nooo')
+			let isSelectable = !cell.classList.contains('black')
+
+			cell.addEventListener(eventType, function(e) {
+				e.stopPropagation();
+				if (isSelectable && e.target.className.includes('cell')) {
+					registerClick(e.target)
+				} else {
+					clearAllSelected()
+				}
+			})
 		})
+	}
+}
+
+let mostRecentlyTouchedCell
+
+function setUpMobileEventHandlers() {
+	let cells = document.querySelectorAll('.cell')
+
+	cells.forEach(function(cell) {
+		let isSelectable = !cell.classList.contains('black')
+		cell.addEventListener('touchstart', handleTouchStart)
+		cell.addEventListener('touchmove', handleTouchMove)
+		cell.addEventListener('touchend', handleTouchEnd)
 	})
+}
+
+function handleTouchStart(e) {
+	registerClick(e.target)
+	mostRecentlyTouchedCell = e.target
+	console.log('start', mostRecentlyTouchedCell)
+}
+
+function handleTouchMove(e) {
+	let currentlyTouchedCell = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
+	if (currentlyTouchedCell != mostRecentlyTouchedCell) registerClick(currentlyTouchedCell)
+	mostRecentlyTouchedCell = currentlyTouchedCell
+	console.log('move', mostRecentlyTouchedCell)
+}
+
+function handleTouchEnd(e) {
+	console.log('end', e.target)
+	console.log('end', mostRecentlyTouchedCell)
 }
 
 function activateCell(cell) {
