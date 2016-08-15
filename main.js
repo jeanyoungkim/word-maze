@@ -28,10 +28,10 @@ const puzzles = {
 	},
 	"color": {
              "strong": {
-                     "letters":"REDOCGEYEPRURANOLLLEPELNEOWOBLULBERGKCANTURQUBROWNEGROIPETTAAMINLANATSESKLAVENDER",
+                     "letters":"REDOCGEYEPRURANOLLLEPELNEOWOBRULBERGNWOKMAGENBLACIOURTIPETSEQRANLANATSUTKLAVENDER",
                      "circled":[0, 80],
-                     "solutions": [['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BLACK', 'BROWN', 'TURQUOISE', 'MAGENTA', 'TAN', 'TEAL', 'PINK', 'LAVENDER'],
-                                    ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BLACK', 'BROWN', 'TAN', 'TEAL', 'PINK', 'LAVENDAR']]
+                     "solutions": [['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'BLACK', 'MAGENTA', 'TURQUOISE', 'TAN', 'TEAL', 'PINK', 'LAVENDER'],
+                                    ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'BLACK', 'MAGENTA', 'TURQUOISE', 'TAN', 'TEAL', 'LAVENDER']]
             }
        }
 }
