@@ -29,12 +29,20 @@ const puzzles = {
 	},
 	"color": {
              "strong": {
-                     "letters":"REDOCGEYEPRURANOLLLEPELNEOWOBRULBERGNWOKMAGENBLACIOURTIPETSEQRANLANATSUTKLAVENDER",
-                     "circled":[0, 80],
+                     "letters": "REDOCGEYEPRURANOLLLEPELNEOWOBRULBERGNWOKMAGENBLACIOURTIPETSEQRANLANATSUTKLAVENDER",
+                     "circled": [0, 80],
                      "solutions": [['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'BLACK', 'MAGENTA', 'TURQUOISE', 'TAN', 'TEAL', 'PINK', 'LAVENDER'],
                                     ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'BLACK', 'MAGENTA', 'TURQUOISE', 'TAN', 'TEAL', 'LAVENDER']]
             }
-       }
+       },
+	"palindrome": {
+							"napoleon": {
+										 "letters": "RLILBANANNALDGCCAWEYEEESIPIGCWCELLOAATREISRABLEWA",
+										 "circled": [5, 43],
+										 "black": [15, 33],
+										 "solutions": [['ABLE', 'WAS', 'I', 'ERE', 'I', 'SAW', 'ELBA']]
+							}
+	}
 }
 
 let theme = window.theme
