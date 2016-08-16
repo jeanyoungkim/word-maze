@@ -103,7 +103,7 @@ func serveCSS(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveAssets(w http.ResponseWriter, r *http.Request) {
-	http.StripPrefix("/", http.FileServer(http.Dir("js/"))).ServeHTTP(w, r)
+	http.StripPrefix("/", http.FileServer(http.Dir("static/"))).ServeHTTP(w, r)
 }
 
 func serveJS(w http.ResponseWriter, r *http.Request) {
