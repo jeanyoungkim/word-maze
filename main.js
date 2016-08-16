@@ -131,12 +131,14 @@ function setUpMobileEventHandlers() {
 }
 
 function handleTouchStart(e) {
+	e.preventDefault()
 	registerClick(e.target)
 	mostRecentlyTouchedCell = e.target
 	console.log('start', mostRecentlyTouchedCell)
 }
 
 function handleTouchMove(e) {
+	e.preventDefault()
 	let currentlyTouchedCell = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
 	if (currentlyTouchedCell != mostRecentlyTouchedCell) registerClick(currentlyTouchedCell)
 	mostRecentlyTouchedCell = currentlyTouchedCell
@@ -144,8 +146,7 @@ function handleTouchMove(e) {
 }
 
 function handleTouchEnd(e) {
-	console.log('end', e.target)
-	console.log('end', mostRecentlyTouchedCell)
+	e.preventDefault()
 }
 
 function activateCell(cell) {
