@@ -18,6 +18,7 @@ const puzzles = {
 			"solutions": [['SAGE', 'BONSAI', 'VENUS', 'FLYTRAP', 'BEETS']]
 		}
 	},
+	// put placeholder letters in for the black squares
 	"fish": {
 		"strong": {
 			"letters": "NIFILONHSMNODGGUATAILSLQIPIGTACSLLOILEZTHHCNMOUYN",
@@ -55,7 +56,8 @@ function initialize() {
 function renderBoard() {
 	const board = document.querySelector('.board')
 	const numRows = Math.sqrt(data.letters.length)
-	board.style.width = numRows * 70 + "px";
+	let cellWidth = isMobile ? 50 : 70
+	board.style.width = numRows * cellWidth + "px";
 
 	for ( i = 0; i < numRows; i++ ) {
 		let colNum = 1
