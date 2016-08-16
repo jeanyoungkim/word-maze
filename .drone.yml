@@ -1,0 +1,43 @@
+# See: https://github.com/drone/drone/blob/v0.4.0/docs/build/README.md
+compose:
+build:
+
+  test:
+    image: jprobinson/ae-go-buildbox:1.6
+    pull: true
+    environment:
+      - GOPATH=/drone
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/drone/bin:/usr/local/go/bin:/usr/local/go_appengine
+    commands:
+      - goapp get -v ./...
+    when:
+      event: [push, pull_request]
+
+  deploy-lab:
+    image: jprobinson/ae-go-buildbox:1.6
+    environment:
+      - GOPATH=/drone
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/drone/bin:/usr/local/go/bin:/usr/local/go_appengine:/usr/local/google-cloud-sdk/bin
+      - BASE64_GCP_TOKEN=$$GAMES_LAB_GCP_TOKEN
+    commands:
+      # get the latest PATCH number and append to major/minor
+      - VERSION="0-0-$(git rev-list HEAD | wc -l)"
+      # dump the GCP token to a file so gcloud can use it
+      - echo $BASE64_GCP_TOKEN | base64 -d > gcp.json
+      # point the gcloud command to the service account creds
+      - gcloud auth activate-service-account --key-file ./gcp.json
+      # make an app.yaml that points to lab so appcfg is happy
+      - cp lab.yaml app.yaml
+      # upload the code, let App Engine build, deploy and verify the new version is up
+      - appcfg.py --oauth2_access_token $(gcloud auth print-access-token) -A games-puzzles-sandbox -V "$VERSION" update app.yaml
+      # set this new version to be the default so it receives all of the traffic
+      - appcfg.py --oauth2_access_token $(gcloud auth print-access-token) -A games-puzzles-sandbox -V "$VERSION" set_default_version .
+    when:
+      branch: master
+      event: push
+
+notify:
+  slack:
+    webhook_url: $$SLACK_WEBHOOK_URL
+    username: drone
+    channel: games-releases

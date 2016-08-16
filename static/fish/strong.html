@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <title>Word Maze</title>
+    <link rel="stylesheet" href="/styles/style.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <a href="/word-maze"><h1>Word Maze</h1></a>
+		<div class="puzzle-info">
+			<p>Theme: Parts of a Fish</p>
+		</div>
+		<div class="congratulations">
+			<div class="congratulations-overlay"></div>
+			<div class="congratulations-modal">
+				<h1>Oh My Cod, You Did It!</h1>
+				<p>
+					Answers:
+				</p>
+				<div class="answers"></div>
+			</div>
+		</div>
+		<div class="event-blocker"></div>
+    <div class="board"></div>
+  </body>
+	<script type="text/javascript">
+		window.theme = "fish"
+		window.difficulty = "strong"
+	</script>
+  <script type="text/javascript" src="/js/main.js"></script>
+</html>
