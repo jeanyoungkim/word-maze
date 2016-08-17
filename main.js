@@ -48,7 +48,7 @@ const puzzles = {
 let style = window.style
 let name = window.name
 
-const data = puzzles[theme][name]
+const data = puzzles[style][name]
 
 const isMobile = mobileCheck()
 const eventType = isMobile ? 'touchstart' : 'mouseover'
