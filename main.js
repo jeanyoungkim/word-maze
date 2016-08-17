@@ -27,6 +27,13 @@ const puzzles = {
 			"solutions": [['FIN', 'TAIL', 'GILL', 'SCALE', 'MOUTH']]
 		}
 	},
+	"shortzian": {
+		"meow": {
+				"letters": "IXIMWOLIKERECIEVMMKHCIEXELILOINIKEWM",
+				"circled": [0, 1],
+				"solutions": [["I", "LIKE", "CHICKEN", "I", "LIKE", "LIVER", "MEOW", "MIX", "MEOW", "MIX", "PLEASE", "DELIVER"]]
+		}
+	}
 	"color": {
              "strong": {
                      "letters": "REDOCGEYEPRURANOLLLEPELNEOWOBRULBERGNWOKMAGENBLACIOURTIPETSEQRANLANATSUTKLAVENDER",
