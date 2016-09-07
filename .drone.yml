@@ -23,7 +23,7 @@ build:
       # get the latest PATCH number and append to major/minor
       - VERSION="0-0-$(git rev-list HEAD | wc -l)"
       # dump the GCP token to a file so gcloud can use it
-      - echo $BASE64_GCP_TOKEN
+      - echo $$GAMES_LAB_GCP_TOKEN
       - echo $BASE64_GCP_TOKEN | base64 -d > gcp.json
       # point the gcloud command to the service account creds
       - gcloud auth activate-service-account --key-file ./gcp.json
