@@ -1,0 +1,23 @@
+@font-face {
+    font-family: magsans;
+		src: url('../fonts/magsans-normal-500.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: magsans-bold;
+		src: url('../fonts/magsans-normal-700.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: franklin-extra-bold;
+		src: url('../fonts/NYTFranklinExtraBold.otf');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: magslab;
+		src: url('../fonts/magslab-normal-700.ttf');
+    font-weight: 700;
+}

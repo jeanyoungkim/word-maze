@@ -4,44 +4,73 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <title>Word Maze</title>
-    <link rel="stylesheet" href="../word-maze/styles/style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../styles/style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <a href="../index.html"><h1>Word Maze</h1></a>
-		<div class="vertical-container">
-			<b><span>Rules</span></b>
-			<ol>
-				<li>Connect the two blue tiles using words</li>
-				<li>You may only traverse horizontally or vertically</li>
-				<li>Each letter may only be visited once</li>
-				<li>Your path must sequentially spell words out</li>
-			</ol>
-			<p>Select a theme and level of difficulty to begin!</p>
+		<div id="help-modal" class="modal">
+			<div class="modal-content">
+				<div id="close-help" class="close-x">×</div>
+				<h1>Rules</h1>
+				<ul>
+					<li>Connect the two blue tiles using words</li>
+					<li>You may only traverse horizontally or vertically</li>
+					<li>Each letter may only be visited once</li>
+					<li>Your path must sequentially spell words out</li>
+				</ul>
+			</div>
 		</div>
-		<div class="vertical-container">
-			<h2>Tutorial</h2>
-			<a href="tutorial/swipe.html"><div class="button">Tutorial 1</div></a>
-			<a href="tutorial/title.html"><div class="button">Tutorial 2</div></a>
-			<a href="tutorial/down.html"><div class="button">Tutorial 3</div></a>
-		</div>
-		<div class="vertical-container">
-			<h2>Original</h2>
-			<a href="original/warmup.html"><div class="button">Plants 1</div></a>
-			<a href="original/strong.html"><div class="button">Plants 2</div></a>
-			<a href="original/tough.html"><div class="button">Plants 3</div></a>
-      <a href="original/fish.html"><div class="button">Fish</div></a>
-		</div>
-		<div class="vertical-container">
-			<h2>Mystery Theme</h2>
-			<a href="mystery/color.html"><div class="button">Strong</div></a>
-		</div>
-    <div class="vertical-container">
-			<h2>Palindromes</h2>
-			<a href="palindrome/napoleon.html"><div class="button">Napoleon</div></a>
-		</div>
-    <div class="vertical-container">
-			<h2>Shortzian</h2>
-			<a href="shortzian/meow.html"><div class="button">Please Deliver!</div></a>
-		</div>
+		<main>
+			<div class="vertical-container">
+				<div class="logo-container">
+					<div class="cell circled active" style="width: 71px; height: 71px;">W
+						<div class="verticalPath bottom"></div>
+						<div class="horizontalPath"></div>
+					</div>
+					<div class="cell active" style="width: 71px; height: 71px;">D
+						<div class="verticalPath bottom"></div>
+						<div class="horizontalPath right"></div>
+					</div>
+					<div class="cell active" style="width: 71px; height: 71px;">M
+						<div class="verticalPath bottom"></div>
+						<div class="horizontalPath left"></div>
+					</div>
+					<div class="cell circled active" style="width: 71px; height: 71px;">E
+						<div class="verticalPath bottom"></div>
+						<div class="horizontalPath"></div>
+					</div>
+					<div class="cell active" style="width: 71px; height: 71px;">O
+						<div class="verticalPath top"></div>
+						<div class="horizontalPath right"></div>
+					</div>
+					<div class="cell active" style="width: 71px; height: 71px;">R
+						<div class="verticalPath top"></div>
+						<div class="horizontalPath left"></div>
+					</div>
+					<div class="cell active" style="width: 71px; height: 71px;">A
+						<div class="verticalPath top"></div>
+						<div class="horizontalPath right"></div>
+					</div>
+					<div class="cell active" style="width: 71px; height: 71px;">Z
+						<div class="verticalPath top"></div>
+						<div class="horizontalPath left"></div>
+					</div>
+				</div>
+				<h2>Today's Puzzles:</h2>
+			</div>
+			<div class="horizontal-container">
+				<a href="../one"><div data-puzzleNumber="1" class="puzzle-select button">1</div></a>
+				<a href="../two"><div data-puzzleNumber="2" class="puzzle-select button">2</div></a>
+				<a href="../three"><div data-puzzleNumber="3" class="puzzle-select button">3</div></a>
+			</div>
+			<div class="vertical-container">
+				<a onclick="openModal('help')">How to Play</a>
+				<a href="mailto:gameprototypes@nytimes.com?Subject=Word%20Maze%20Feedback">Contact Us »</a>
+			</div>
+		</main>
   </body>
+	<script type="text/javascript" src="../js/puzzles.js"></script>
+	<script type="text/javascript" src="../shared/js/modal.js"></script>
+	<script type="text/javascript" src="../shared/js/utils.js"></script>
+	<script type="text/javascript" src="../js/storage.js"></script>
+	<script type="text/javascript" src="../js/welcome.js"></script>
 </html>

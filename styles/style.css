@@ -1,17 +1,24 @@
-body {
-  background-color: #e8e8e8;
-  font-family: Helvetica, Arial, sans-serif;
-  display: flex;
-	flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-	margin: 0;
+@import '../../shared/styles/imports.css';
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+html {
+	font-size: 16px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+  background-color: #f2f2f2;
+	/*--teal: rgb(165, 219, 217);*/
+	--teal: darkcyan;
+  font-family: magsans;
+	height: 100vh;
+	margin: 0;
+}
+
+header {
+	background-color: var(--teal);
 }
 
 div {
@@ -27,11 +34,99 @@ a {
 	text-decoration: none;
 }
 
+h1 {
+	font-family: magslab;
+	font-size: 3rem;
+}
+
+.logo-container {
+	margin: 30px auto;
+	width: 300px;
+	height: 150px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+#welcome .puzzle-info p {
+	margin: 5px 0;
+}
+
+#welcome .theme h1,
+#welcome .theme p {
+	margin: 5px 0;
+}
+
+.game-container {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
 .vertical-container {
 	flex-direction: column;
 	flex-wrap: nowrap;
 	flex: 1 0 auto;
 	margin: 10px 0;
+	padding: 0 3%;
+}
+
+.vertical-container a {
+	font-size: 1.2rem;
+	border-bottom: 3px solid var(--teal);
+	margin: 20px 0;
+}
+
+.horizontal-container {
+	margin: 0 auto 40px auto;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 300px;
+}
+
+.puzzle-select.button {
+	box-shadow: 0 4px 0 #ccc;
+	font-size: 1.3rem;
+	height: 71px;
+	width: 71px;
+	padding: 2rem;
+	width: auto;
+	position: relative;
+}
+
+.puzzle-select.button:active {
+	box-shadow: 0 0 0 0;
+	top: 4px;
+}
+
+.puzzle-select.button.completed {
+	top: 4px;
+	box-shadow: 0 0 0 0;
+	border: 0;
+	background-color: #ddd;
+}
+
+/*
+.puzzle-select.button.completed::after {
+	content: 	'\002B50';
+	color: var(--teal);
+	position: absolute;
+	left: 0;
+	text-align: center;
+	top: 0;
+	width: 100%;
+}*/
+
+.vertical-container ul {
+	padding: 0 10%;
+	width: 100%;
+}
+
+.board {
+	flex-direction: row;
 }
 
 .tough .board {
@@ -47,10 +142,6 @@ a {
 	width: 150px;
 }
 
-.button:hover {
-	border: 4px solid #a5dbd9;
-}
-
 @keyframes stretchIn {
   0% {
 
@@ -61,12 +152,13 @@ a {
 }
 
 .cell {
+	font-size: 1.4rem;
   margin: 0.5%;
   border-radius: 10px;
   background-color: #fff;
-  color: #a5dbd9;
-  font-size: 2em;
+  color: var(--teal);
   position: relative;
+	padding-top: 1%;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -79,33 +171,75 @@ a {
   animation-duration: 1s;
 }
 
+.verticalPath,
+.horizontalPath {
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+.verticalPath.top::before,
+.verticalPath.bottom::after,
+.horizontalPath.left::before,
+.horizontalPath.right::after {
+	content: '';
+	position: absolute;
+	border: 2px solid #333;
+	border-radius: 10px;
+}
+
+.horizontalPath.left::before,
+.horizontalPath.right::after {
+	width: 20%;
+}
+
+.verticalPath::before,
+.verticalPath::after {
+	transform: rotate(90deg);
+	width: 20%;
+}
+
+.horizontalPath.left::before {
+	left: -4px;
+}
+
+.horizontalPath.right::after {
+	right: -4px;
+}
+
+.verticalPath.top::before {
+	top: 0px;
+}
+
+.verticalPath.bottom::after {
+	bottom: 0;
+}
+
 .cell.active,
 .cell:hover {
-  background-color: #a5dbd9;
+  background-color: #bbb;
   color: #fff;
 	cursor: pointer;
-	border: 4px solid #a5dbd9;
 }
 
 @media only screen and (max-device-width: 500px) {
 	.board {
+		margin: 0 auto;
 		max-width: 500px;
 	}
 
-  .congratulations-modal .cell {
-    height: 44px;
-    width: 44px;
-  }
-
   .cell {
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
 }
 
 .black {
   margin: 0.5%;
   border-radius: 10px;
-  font-size: 2em;
+  font-size: 2rem;
   position: relative;
 	background-color: #333;
   -webkit-touch-callout: none;
@@ -125,16 +259,15 @@ a {
 
 @keyframes animateBorder {
   to {
-    outline-color: #a5dbd9;
+    outline-color: var(--teal);
     box-shadow: 0 0 0 3px white;
   }
 }
 
 .circled {
-	background-color: #a5dbd9;
+	background-color: var(--teal);
 	color: #fff;
-  outline: 3px dashed white;
-  box-shadow: 0 0 0 3px #a5dbd9;
+  border: 3px dashed white;
   animation: 1s animateBorder infinite;
   animation-name: stretchIn;
   animation-iteration-count: 1;
@@ -144,8 +277,8 @@ a {
 
 .circled.active,
 .circled:hover {
-	border: 4px solid #fff;
-  outline: 0;
+	border: none;
+	background-color: var(--teal);
   box-shadow: none;
   animation: stretchIn;
 }
@@ -175,35 +308,14 @@ a {
       transform: translateY(0);
     }
 }
-.congratulations-modal {
-	z-index: 150;
-	background-color: white;
-	padding: 2em 3em;
-	flex-direction: column;
-	border-radius: 10px;
-  animation: 1s swingIn 1;
+
+#congrats-modal .oblong-button {
+	background-color: var(--teal);
+	color: white;
 }
 
-.congratulations-modal h1 {
-	margin-bottom: 0;
-}
-
-.congratulations-modal div {
-	flex-wrap: nowrap;
-}
-
-.congratulations-modal .button {
-  border: 4px solid #a5dbd9;
-  text-transform: uppercase;
-  width: 200px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-top: 2em;
-}
-
-.congratulations-modal .circled.active {
-	border: 4px dotted #fff;
-  animation: stretchIn;
+.modal a {
+	border-color: var(--teal);
 }
 
 .answers {
@@ -216,9 +328,6 @@ a {
 
 .event-blocker {
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
   z-index: -100;
 }

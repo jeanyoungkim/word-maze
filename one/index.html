@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <title>Word Maze</title>
+    <link rel="stylesheet" href="../styles/style.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+		<div id="concierge">
+			<section id="welcome">
+				<div class="puzzle-info">
+					<p class="puzzle-date"></p>
+					<p>Puzzle One</p>
+				</div>
+				<div class="theme">
+					<p>Theme:</p>
+					<h1>Plants</h1>
+				</div>
+				<div>
+					<p>Swipe up to start!</p>
+					<div class="arrow bounce"></div>
+				</div>
+			</section>
+		</div>
+
+		<div id="help-modal" class="modal">
+			<div class="modal-content">
+				<div id="close-help" class="close-x">×</div>
+				<h1>Rules</h1>
+				<ul>
+					<li>Connect the two blue tiles using words</li>
+					<li>You may only traverse horizontally or vertically</li>
+					<li>Each letter may only be visited once</li>
+					<li>Your path must sequentially spell words out</li>
+				</ul>
+				<hr>
+				<p>Have feedback? </br><a href="mailto:gameprototypes@nytimes.com?Subject=Word%20Maze%20Feedback">Email Us »</a></p>
+			</div>
+		</div>
+
+		<div id="congrats-modal" class="modal">
+			<div class="modal-content">
+				<div id="close-congrats" class="close-x">×</div>
+				<h1>A-maze-ing!</h1>
+				<p class="answers">Answers: </p>
+				<button id="back-to-news" class="oblong-button">Return to Top Stories</button>
+				<hr>
+				<button id="play-another" class="oblong-button">Play Another Puzzle</button>
+				<p>Or come back tomorrow for a new challenge.</p>
+				<hr>
+				<p><a href="mailto:gameprototypes@nytimes.com?Subject=Spelling%20Bee%20Feedback">Email Us »</a></p>
+			</div>
+		</div>
+
+		<main class="page">
+			<header>
+				<div id="help-button">?</div>
+				<a href=".."><h1>Word Maze</h1></a>
+				<div id="ghost-help-button"></div>
+			</header>
+			<div class="event-blocker"></div>
+			<div class="game-container">
+				<div class="board"></div>
+			</div>
+		</main>
+  </body>
+	<script type="text/javascript">
+		window.puzzleNumber = 1;
+	</script>
+	<script type="text/javascript" src="../js/puzzles.js"></script>
+	<script src="../shared/js/moment.min.js"></script>
+	<script type="text/javascript" src="../shared/js/lodash.js"></script>
+	<script type="text/javascript" src="../shared/js/utils.js"></script>
+	<script type="text/javascript" src="../shared/js/concierge.js"></script>
+	<script type="text/javascript" src="../shared/js/modal.js"></script>
+	<script type="text/javascript" src="../js/storage.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+</html>

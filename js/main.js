@@ -1,148 +1,93 @@
-// Puzzle Data
-// "circled" is 0 indexed
-var puzzles = {
-	"tutorial": {
-		"swipe": {
-			"letters": "SWIPEFROMSTOS",
-			"circled":[0,12],
-			"solutions": [["SWIPE", "FROM", "S", "TO", "S"]],
-			"width": 13,
-			"height": 1
-		},
-		"title": {
-			"letters": "THISISWORDMAZE",
-			"circled":[0, 13],
-			"solutions": [["THIS", "IS", "WORD", "MAZE"]],
-			"width": 14,
-			"height" : 1
-		},
-		"down":{
-			"letters": "YOUCANGODZZZZZZZZZZZOZZZZZZZZZZZWZZZZZZZZZZZNTOO",
-			"circled":[0, 47],
-			"black": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
-			"solutions": [["YOU", "CAN", "GO", "DOWN", "TOO"]],
-			"width" : 12,
-			"height": 4
-		},
-	},
-	"plants": {
-		"warm_up":  {
-			"letters": "YTRXBEESUIVUSHYN",
-			"circled": [1, 14],
-			"solutions": [["TREE", "IVY"], ["TREE", "BUSH", "IVY"]],
-			"width":4,
-			"height":4
-		},
-		"strong": {
-			"letters": "LEPEAWOAESNACSAHULARSRTSMOHIMPTOTSQZ",
-			"circled": [2, 33],
-			"solutions": [['PEAS', 'ROOTS'], ['PEA', 'SHOOTS']],
-			"width":6,
-			"height":6
-		},
-		"tough": {
-			"letters": "SNASORMIAOPAPGUVIBEGPCOYVEIPLERNUNZZAENSSRAPXLBOFTEBQSEYLYETSZAN",
-			"circled": [3, 60],
-			"solutions": [['SAGE', 'BONSAI', 'VENUS', 'FLYTRAP', 'BEETS']],
-			"width":8,
-			"height":8
-		}
-	},
-	// put placeholder letters in for the black squares
-	"fish": {
-		"strong": {
-			"letters": "NIFILONHSMNODGGUATAILSLQIPIGTACSLLOILEZTHHCNMOUYN",
-			"circled": [2, 40],
-			"black": [15, 25, 38],
-			"solutions": [['FIN', 'TAIL', 'GILL', 'SCALE', 'MOUTH']],
-			"width":7,
-			"height":7
-		}
-	},
-	"shortzian": {
-		"meow": {
-			"letters": "IXIMWOLIKERECIEVMMKHCIEXELILOINIKEWM",
-			"circled": [0, 1],
-			"solutions": [["I", "LIKE", "CHICKEN", "I", "LIKE", "LIVER", "MEOW", "MIX", "MEOW", "MIX"]],
-			"width":6,
-			"height":6
-			}
-	},
-	"color": {
-             "strong": {
-                     "letters": "REDOCGEYEPRURANOLLLEPELNEOWOBRULBERGNWOKMAGENBLACIOURTIPETSEQRANLANATSUTKLAVENDER",
-                     "circled": [0, 80],
-                     "solutions": [['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'BLACK', 'MAGENTA', 'TURQUOISE', 'TAN', 'TEAL', 'PINK', 'LAVENDER'],
-                                    ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'BLACK', 'MAGENTA', 'TURQUOISE', 'TAN', 'TEAL', 'LAVENDER']],
-		     "width":9,
-		     "height":9
-            }
-       },
-	"palindrome": {
-		"napoleon": {
-		 	 "letters": "RLILBANANNALDGCCAWEYEEESIPIGCWCELLOAATREISRABLEWA",
-			 "circled": [5, 43],
-			 "black": [15, 33],
-			 "solutions": [['ABLE', 'WAS', 'I', 'ERE', 'I', 'SAW', 'ELBA']],
-			 "width":7,
-			 "height":7
-			}
-	}
-};
-
-var style = window.style;
-var name = window.name;
-
-var data = puzzles[style][name];
+var data;
+var letters;
+var selectedCell;
+var selectedCells = [];
 
 var isMobile = mobileCheck();
 var eventType = isMobile ? 'touchstart' : 'mouseover';
-var selectedCells = [];
-var letters = data.letters.split('');
-var selectedCell;
 
 function initialize() {
-	renderBoard();
+	// localStorage.clear();
+	checkLocalStorage();
+	getPuzzleData();
+
+	var completedPuzzle = getPuzzleProgress(puzzleNumber);
+	if (completedPuzzle) {
+		renderBoard(completedPuzzle);
+	} else {
+		renderBoard();
+	}
+
+	renderPuzzleInfo();
 	setUpEventHandlers();
 }
 
-function renderBoard() {
+function renderPuzzleInfo() {
+	var date = document.querySelector('.puzzle-date');
+	date.innerText = moment().format('MMMM D, YYYY');
+
+	var theme = document.querySelector('.theme').querySelector('h1');
+	theme.innerText = data.theme;
+}
+
+function getPuzzleData() {
+	var puzzleIndex = puzzleNumber - 1
+	var todaysPuzzles = puzzles[dayOfTest] ? puzzles[dayOfTest] : puzzles[0]; // default to the first day if the test is over
+	data = todaysPuzzles[puzzleIndex];
+	letters = data.letters.split('');
+}
+
+function renderBoard(progress) {
 	var board = document.querySelector('.board');
+
 	var numRows = data.height;
 	var numColumns = data.width;
-	var cellWidth = isMobile && numRows > 4 ? (window.innerWidth - 20)/(numRows + 1) : 60;
-	var boardIsBiggerThanWindow = cellWidth * numColumns > window.innerWidth;
-	board.style.width = isMobile && numColumns > 4 ? window.innerWidth - 20 + "px" : numColumns * (cellWidth + 10) + "px";
+	var cellWidth = isMobile ? (window.innerWidth - 20)/(numColumns + 1) : 800 / (numColumns + 1);
 
-	for ( i = 0; i < numRows; i++ ) {
-		var colNum = 1;
-		for ( j = numColumns * i; j < (numColumns * (i + 1)); j++ ) {
-				var cell = document.createElement('div');
-				cell.className = "cell";
-				cell.style.animationPlayState = "paused";
-				cell.style.width = cellWidth + "px";
-				cell.style.height = cellWidth + "px";
-				cell.style.transform = 'scale(' + Math.random() + ')';
-				cell.style.animationPlayState = "running";
-				cell.addEventListener("animationend", function() { this.style.transform = 'scale(1)';});
-				if (data.circled.indexOf(j) > -1) cell.className += " circled";
-				if (data.black && data.black.indexOf(j) > -1) {
-					cell.className = 'black';
+	var mobileBoardWidth = window.innerWidth - 20;
+	var desktopBoardWidth = numColumns * (cellWidth + 10);
+	var boardWidth = isMobile && numColumns > 4 ? mobileBoardWidth : desktopBoardWidth;
+
+	if (progress) {
+		board.outerHTML = progress;
+		board.style.width = `${boardWidth}px`;
+		document.querySelectorAll('.cell').forEach(function(cell) {
+			cell.style.width = 800 / (numColumns + 1);
+		})
+	} else {
+		board.style.width = `${boardWidth}px`;
+		for ( i = 0; i < numRows; i++ ) {
+			var colNum = 1;
+			for ( j = numColumns * i; j < (numColumns * (i + 1)); j++ ) {
+					var cell = document.createElement('div');
+					var verticalPath = document.createElement('div');
+					verticalPath.className = "verticalPath";
+					var horizontalPath = document.createElement('div');
+					horizontalPath.className = "horizontalPath";
+					cell.className = "cell";
+					cell.style.width = cellWidth + "px";
+					cell.style.height = cellWidth + "px";
+					if (data.circled.indexOf(j) > -1) cell.className += " circled";
+					if (data.black && data.black.indexOf(j) > -1) {
+						cell.className = 'black';
+						board.appendChild(cell);
+					} else {
+						cell.innerHTML = data.letters[j];
+						cell.setAttribute("row", i + 1);
+						cell.setAttribute("column", colNum);
+						cell.appendChild(verticalPath);
+						cell.appendChild(horizontalPath);
+					}
+
+					if (colNum == numColumns) {
+						colNum = 1;
+					} else {
+						colNum = colNum + 1;
+					}
+
 					board.appendChild(cell);
-				} else {
-					cell.innerHTML = data.letters[j];
-					cell.setAttribute("row", i + 1);
-					cell.setAttribute("column", colNum);
-				}
 
-				if (colNum == numColumns) {
-					colNum = 1;
-				} else {
-					colNum = colNum + 1;
-				}
-
-				board.appendChild(cell);
-
+			}
 		}
 	}
 }
@@ -155,6 +100,9 @@ function setUpEventHandlers() {
 			clearAllSelected();
 		}
 	})
+
+	var helpButton = document.querySelector('#help-button');
+	helpButton.addEventListener('click', function() { openModal('help') });
 
 	if (isMobile) {
 		setUpMobileEventHandlers();
@@ -205,8 +153,54 @@ function handleTouchEnd(e) {
 	e.preventDefault();
 }
 
-function activateCell(cell) {
-	cell.classList.add('active');
+function getPathDirections(sharedAtt, delta) {
+	var direction = sharedAtt === 'row' ? 'horizontal' : 'vertical';
+	var containerName = `${direction}Path`;
+	var paths = {
+		'horizontal': {
+			'-1': ' left',
+			'1': ' right'
+		},
+		'vertical': {
+			'-1': ' top',
+			'1': ' bottom'
+		}
+	};
+
+	var currentsPath = paths[direction][delta * -1];
+	var lastsPath = paths[direction][delta];
+
+	return {
+		container: containerName,
+		current: currentsPath,
+		last: lastsPath
+	}
+}
+
+function erasePath(last, current, sharedAtt, delta) {
+	var paths = getPathDirections(sharedAtt, delta);
+
+	current.querySelectorAll(`.${paths.container}`)[0].classList = paths.container;
+	var lastClasses = last.querySelectorAll(`.${paths.container}`)[0].className.replace(paths.current, '');
+
+	last.querySelectorAll(`.${paths.container}`)[0].classList = lastClasses;
+}
+
+function drawPath(last, current, sharedAtt, delta) {
+	var paths = getPathDirections(sharedAtt, delta);
+
+	current.querySelectorAll(`.${paths.container}`)[0].classList += paths.current;
+	last.querySelectorAll(`.${paths.container}`)[0].classList += paths.last;
+}
+
+function selectCell(cell) {
+	cell.classList += ' active';
+	selectedCells.push(cell);
+}
+
+function deselectCell(cell) {
+	cell.classList.remove('active');
+	selectedCells.splice(selectedCells.indexOf(cell), 1);
 }
 
 function deactivateCell(cell) {
@@ -217,12 +211,10 @@ function registerClick(selected) {
 	// Make sure first cell selected is a circled letter
 	if (selectedCells.length < 1 ) {
 		if (selected.className.indexOf('circled') > -1 && !selectedCells.indexOf(selectedCell) > -1) {
-			activateCell(selected);
-			selectedCells.push(selected);
+			selectCell(selected);
 		}
 		return
 	}
-console.log(selected);
 	selectedCell = selected // define newly selected cell
 	validateOrClearSelection();
 }
@@ -235,8 +227,6 @@ function validateOrClearSelection() {
 	// deselect
 	if (isAlreadySelected()) {
 		removeLineFromSelected();
-		// selectedCells[selectedCells.length - 1].classList.remove('active');
-		// selectedCells.pop();
 	// select
 	} else if (areAligned()) {
 		addLineToSelected();
@@ -253,7 +243,6 @@ function areAligned() {
 	} else if (lastSelected.attributes.column.value === selectedCell.attributes.column.value){
 		return 'column';
 	}
-console.log("not aligned");
 	return false;
 }
 
@@ -268,8 +257,9 @@ function addLineToSelected() {
 
 	for ( i = lastPosition + delta; i != newPosition + delta; i += delta ) {
 		var cellInLine = document.querySelector("["+ sharedAtt + "='" + selectedCell.attributes[sharedAtt].value +"']["+ lineDirection + "='" + i +"']");
-		cellInLine.className += ' active';
-		selectedCells.push(cellInLine);
+		selectCell(cellInLine);
+		drawPath(lastSelected, cellInLine, sharedAtt, delta);
+		lastSelected = cellInLine;
 	}
 }
 
@@ -284,9 +274,10 @@ function removeLineFromSelected() {
 
 	for ( i = lastPosition; i != newPosition; i += delta ) {
 		var cellInLine = document.querySelector("["+ sharedAtt + "='" + selectedCell.attributes[sharedAtt].value +"']["+ lineDirection + "='" + i +"']");
-		selectedCells.splice(selectedCells.indexOf(cellInLine), 1);
-		cellInLine.classList.remove('active');
-		// selectedCells.push(cellInLine);
+		var adjacentIndex = i + delta;
+		var adjacentCell = document.querySelector("["+ sharedAtt + "='" + selectedCell.attributes[sharedAtt].value +"']["+ lineDirection + "='" + adjacentIndex +"']");
+		deselectCell(cellInLine);
+		erasePath(adjacentCell, cellInLine, sharedAtt, delta);
 	}
 }
 
@@ -313,7 +304,7 @@ function checkSolution() {
 
 	var guessString = ""
 	selectedCells.forEach(function(element) {
-		guessString += element.innerHTML;
+		guessString += element.innerText;
 	})
 
 	for ( i = 0; i < data.solutions.length; i++) {
@@ -330,40 +321,24 @@ function checkSolution() {
 }
 
 function win(index, isBackwards) {
-	var answersContainer = document.querySelector('.answers');
+	var congratsModal = document.querySelector('#congrats-modal');
+	var answersContainer = congratsModal.querySelector('.answers');
+
+	var puntainer = congratsModal.querySelector('h1');
+
+	if (data.pungratulations) puntainer.innerText = `${data.pungratulations}!`;
+
 	var answerArray = data.solutions[index];
-	// clone selected cell nodes
-	var selectedCellsCopy = [];
-	selectedCells.forEach(function(cell) {
-		var cellClone = cell.cloneNode(true);
-		selectedCellsCopy.push(cellClone);
-	})
-
-	if (isBackwards) selectedCellsCopy.reverse();
-
+	if (isBackwards) answerArray.reverse();
 	var offset = 0;
-	answerArray.forEach(function(text, index) {
-		var singleAnswer = document.createElement('div');
-		// var offset = index == 0 ? 0 : answerArray[index - 1].length
-		var tiles = selectedCellsCopy.slice(offset, offset + text.length);
-		offset += text.length;
+	answersContainer.innerText += answerArray.join(', ');
 
-		singleAnswer.className = 'answer';
-
-		tiles.forEach(function(tile) {
-			singleAnswer.appendChild(tile);
-		})
-		answersContainer.appendChild(singleAnswer);
-	})
+	var completedBoard = document.querySelector('.board');
+	localStorage.setItem(`${puzzleNumber}-completed`, completedBoard.outerHTML);
 
 	setTimeout(function(){
-		showCongratsModal();
+		openModal('congrats');
 	}, 400)
-}
-
-function showCongratsModal() {
-	var congrats = document.querySelector('.congratulations');
-	congrats.style.display = "flex";
 }
 
 function lose() {
@@ -385,7 +360,7 @@ function flashText() {
 	var highlightedCellsList = document.querySelectorAll('.active');
 	var highlightedCells = Array.prototype.slice.call(highlightedCellsList, 0);
 	highlightedCells.forEach(function(cell) {
-		cell.style.borderColor = cell.style.borderColor == "" ? "#F27376" : "";
+		cell.style.backgroundColor = cell.style.backgroundColor == "var(--teal)" ? "#F27376" : "var(--teal)";
 	})
 }
 
@@ -393,7 +368,9 @@ function resetCellColors() {
 	var highlightedCellsList = document.querySelectorAll('.active');
 	var highlightedCells = Array.prototype.slice.call(highlightedCellsList, 0);
 	highlightedCells.forEach(function(cell) {
-		cell.style.borderColor = "";
+		cell.style.backgroundColor = "";
+		cell.querySelectorAll('.verticalPath')[0].classList = 'verticalPath';
+		cell.querySelectorAll('.horizontalPath')[0].classList = 'horizontalPath';
 	})
 }
 

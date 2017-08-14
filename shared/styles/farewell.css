@@ -1,0 +1,56 @@
+@import './fonts.css';
+
+* {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	font-size: 16px;
+	margin: 0;
+}
+
+body {
+	background-color: black;
+	color: white;
+	font-family: magsans-normal;
+	padding: 0 8%;
+	height: 100vh;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+			-ms-flex-direction: column;
+					flex-direction: column;
+	-webkit-box-align: center;
+			-ms-flex-align: center;
+					align-items: center;
+	-webkit-box-pack: center;
+			-ms-flex-pack: center;
+					justify-content: center;
+}
+
+h1 {
+	font-family: magslab;
+	font-size: 1.8em;
+	margin-bottom: 15px;
+}
+
+hr {
+	height: 3px;
+  width: 40px;
+  background-color: white;
+  border: none;
+  margin-bottom: 15px;
+}
+
+p {
+	line-height: 1.5;
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+a {
+	border-bottom: 3px solid #f8cd05;
+	color: white;
+	text-decoration: none;
+}
